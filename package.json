@@ -1,0 +1,19 @@
+{
+  "name": "riot-admin",
+  "version": "1.0.0",
+  "description": "generic api-agnostic admin dashboard interface, like ng-admin but less javascript-ish.",
+  "main": "index.js",
+  "scripts": {
+    "compile": "./bundle",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies":{
+    "css2js": "^0.1.4",
+    "riotjs": "^1.0.4",
+    "typeshave": "^0.3.0"
+  },
+  "dependencies": {
+  }
+}

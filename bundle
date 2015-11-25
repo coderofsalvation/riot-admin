@@ -1,0 +1,3 @@
+riot tags src/tags.js
+node_modules/css2js/css2js --css=src/riot-admin.css --out=src/riot-admin.css.js --template=vanilla_runner
+browserify -r typeshave node_modules/riotjs/riot.min.js src/tags.js src/riot-admin.js src/riot-admin.css.js | uglifyjs -o dist/riot-admin.min.js

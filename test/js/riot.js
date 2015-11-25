@@ -1,0 +1,1 @@
+../../node_modules/riotjs/riot.js
