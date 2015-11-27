@@ -17,17 +17,18 @@
   </div>
 
   <script>
-    expandsub = (el) ->
+
+    @expandsub = (el) ->
       if el.target.parentElement.children[1] != undefined
         el.target.parentElement.children[1].toggleClass 'expand'
       return
 
-    hide = ->
+    @hide = ->
       @sidedrawer.removeClass 'active'
       document.body.removeClass 'hide-sidedrawer'
       return
 
-    toggle = ->
+    @toggle = ->
       @sidedrawer.toggleClass 'active'
       document.body.toggleClass 'hide-sidedrawer'
       return

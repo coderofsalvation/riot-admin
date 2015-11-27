@@ -6,27 +6,9 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/page.js/1.6.3/page.min.js"></script>
   <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
   <script src="https://cdn.rawgit.com/riot/riot/master/riot+compiler.min.js"></script>
-  <script src="js/riot-admin.min.js"></script>
-
-  <!-- customize templates here -->
-  <script type="riot/tag">
-
-    <home>
-      <h1>Welcome to { opts.project.title }</h3>
-      Lorem ipsum dolor sit amet.<br>
-      Lorem ipsum dolor sit amet.<br>
-      Lorem ipsum dolor sit amet.<br>
-    </home>
-
-    <rest-items>
-      <h1>Rest items</h1>
-      <collection/>
-    </rest-items>
-
-  </script>
+  <script src="/js/riot-admin.min.js"></script>
 
   <script type="text/javascript">
     require('domready')( function(){
@@ -36,22 +18,25 @@
           "logo": "<i class='fa fa-fw fa-globe'/>&nbsp;",
           "url": "http://mylandingpage.com"
         },
+        "routes":[
+          { route:"/" ,       tag:"home" },
+          { route:"/bar/:id" ,tag:"bar1" },
+        ],
+        routeroptions: { hashbang: true },
         "menu":{
           "items":[
             {
               "icon":"<i class='fa fa-fw fa-area-chart'></i>&nbsp;",
               "label": "Home",
-              "href":"/foo",
-              "type":"link",
-              "tag": "home"
+              "href":"/",
+              "type":"link"
             },
             {
               "icon":"<i class='fa fa-fw fa-fire'/></i>&nbsp;",
               "label":"Sub items",
               "type":"submenu",
               "items": [
-                {"label": "bar1", "type":"link", href:"#/foo.html" },
-                {"label": "bar2", "type":"link", href:"#/foo2.html" }
+                {"label": "bar1", "type":"link", href:"/bar/1" },
               ]
             },{
               "icon":"<i class='fa fa-fw fa-exchange'></i>&nbsp;",
@@ -126,6 +111,33 @@
     <app-header></app-header>
     <app-main></app-main>
     <app-footer></app-footer>
+
+    <!-- customize templates here -->
+    <script type="riot/tag">
+
+      <home>
+        <h1>Welcome to { opts.project.title }</h3>
+        Lorem ipsum dolor sit amet.<br>
+        Lorem ipsum dolor sit amet.<br>
+        Lorem ipsum dolor sit amet.<br>
+      </home>
+
+      <bar1>
+        <h1>Bar 1 { opts.project.title }</h3>
+        <img alt="" src="http://www.gifbin.com/bin/092014/1410113214_cat_in_a_bag_scares_another_cat.gif"/>
+        <br>
+        Lorem ipsum dolor sit amet.<br>
+        Lorem ipsum dolor sit amet.<br>
+        Lorem ipsum dolor sit amet.<br>
+      </bar1>
+
+      <rest-items>
+        <h1>Rest items</h1>
+        <collection/>
+      </rest-items>
+
+    </script>
+
 
   </body>
 </html>

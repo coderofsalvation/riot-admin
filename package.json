@@ -21,6 +21,6 @@
   },
   "dependencies": {
     "nanobar": "^0.2.1",
-    "riot-routehandler": "^1.1.0"
+    "riot-routehandler": "git+https://github.com/coderofsalvation/riot-routehandler.git"
   }
 }

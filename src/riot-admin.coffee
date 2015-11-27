@@ -1,8 +1,10 @@
-typeshave = require('typeshave')
-nanobar   = require('nanobar')
+nanobar      = require 'nanobar'
+routehandler = require 'riot-routehandler'
 
+typeshave = require('typeshave')
 typeshave.verbose = 1
 typesafe = typeshave.typesafe
+
 
 riotadmin = typesafe({
   'type': 'object'
@@ -26,10 +28,6 @@ riotadmin = typesafe({
 }, (config) ->
   riot.compile ->
     window.loadingbar = config.loadingbar = new nanobar({bg: '#333'})
-    config.routes = [ { route:"#/foo", tag:"home" } ]
-    config.routeroptions = {hashbang:true}
-    @tags = riot.mount('*', config)
-    console.dir @tags
     #riot.route.base '/'
     #riot.route.start true
     
@@ -69,7 +67,28 @@ riotadmin = typesafe({
       return
 
     ###
-    # setup animations & fades
+    # set page transition
+    ###
+    #
+    config.routeroptions.pagehandlers = 
+      '*': (ctx,next) ->
+        if window.url != ctx.canonicalPath 
+          window.url = ctx.canonicalPath
+          $('#content').addClass('fadeout').removeClass('fadein')
+          setTimeout () ->
+            $('#content').addClass('fadein').removeClass('fadeout')
+            window.loadingbar.go 100
+            next();
+          ,400
+        else next();
+    ###
+    # mount the tags
+    ###
+    @tags = riot.mount('*', config)
+    rh = riot.mount 'routehandler', config 
+
+    ###
+    # setup events 
     ###
     $bodyEl = $('body')
     $sidedrawerEl = $('#sidedrawer')
@@ -79,7 +98,7 @@ riotadmin = typesafe({
     $('.js-show-sidedrawer').addEventListener 'click', $('app-sidemenu')._tag.toggle
     $('#sidedrawer-toggler-xs').addEventListener 'click', $('app-sidemenu')._tag.toggle
     $('#content').addClass 'fadein'
-
+    
     return
   return
 )
