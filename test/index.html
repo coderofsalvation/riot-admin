@@ -6,111 +6,116 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <link href="//cdn.muicss.com/mui-latest/css/mui.min.css" rel="stylesheet" type="text/css" />
-  <script src="//cdn.muicss.com/mui-latest/js/mui.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/page.js/1.6.3/page.min.js"></script>
   <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
-
-  <!--
-     -<script src="js/tags/app-main.tag" type="riot/tag"></script>
-     -<script src="js/tags/app-header.tag" type="riot/tag"></script>
-     -<script src="js/tags/app-footer.tag" type="riot/tag"></script>
-     -<script src="js/tags/app-sidemenu.tag" type="riot/tag"></script>
-     -<script src="js/tags/collection.tag" type="riot/tag"></script>
-     -<script src="js/tags/raw.tag" type="riot/tag"></script>
-     -->
-  <script src="js/tags.js" type="riot/tag"></script>
   <script src="https://cdn.rawgit.com/riot/riot/master/riot+compiler.min.js"></script>
-  <link href="css/riot-admin.css" rel="stylesheet" type="text/css" />
-  <script src="js/typeshave.min.js"></script>
-  <script src="js/riot-admin.js"></script>
+  <script src="js/riot-admin.min.js"></script>
 
-  <!-- customize collection header here -->
+  <!-- customize templates here -->
   <script type="riot/tag">
-    <collection-header>
-      <h3>{ title }</h3>
-    </collection-header>
+
+    <home>
+      <h1>Welcome to { opts.project.title }</h3>
+      Lorem ipsum dolor sit amet.<br>
+      Lorem ipsum dolor sit amet.<br>
+      Lorem ipsum dolor sit amet.<br>
+    </home>
+
+    <rest-items>
+      <h1>Rest items</h1>
+      <collection/>
+    </rest-items>
+
   </script>
 
   <script type="text/javascript">
-    riotadmin({
-      "project":{
-        "title": "riotadmin.io",
-        "logo": "<i class='fa fa-fw fa-globe'/>&nbsp;",
-        "url": "http://mylandingpage.com"
-      },
-      "menu":{
-        "items":[
-          { 
-            "icon":"<i class='fa fa-fw fa-area-chart'></i>&nbsp;",
-            "label": "Link",
-            "href":"/foo",
-            "target": "_blank",
-            "type":"link"
-          },
-          {
-            "icon":"<i class='fa fa-fw fa-fire'/></i>&nbsp;",
-            "label":"Sub items",
-            "type":"submenu",
-            "items": [
-              {"label": "bar1", "type":"link", href:"#/foo.html" },
-              {"label": "bar2", "type":"link", href:"#/foo2.html" }
-            ]
-          },{
-            "icon":"<i class='fa fa-fw fa-exchange'></i>&nbsp;",
-            "label":"REST items",
-            "href":"#/rest-items",
-            "type":"collection",
-            "data": function(cb,options){
-              // replace data with an ajax/rest call (use options object to pass on query,sort,order,limit,offset etc)
-              cb({
-                title: "This is a collection",
-                data:[
-                  {"name":"bar","age":12,"type":"human","sex":"male","likes fishing":"no"},
-                  {"name":"bar","age":13,"type":"human","sex":"male","likes fishing":"no"},
-                  {"name":"bar","age":14,"type":"human","sex":"male","likes fishing":"no"},
-                  {"name":"bar","age":15,"type":"human","sex":"male","likes fishing":"yes"},
-                  {"name":"bar","age":16,"type":"human","sex":"male","likes fishing":"yes"},
-                  {"name":"bar","age":17,"type":"human","sex":"male","likes fishing":"yes"},
-                  {"name":"bar","age":18,"type":"human","sex":"male","likes fishing":"yes"}
-                ]
-              });
-            }
-          },{
-            "icon":"<i class='fa fa-fw fa-paperclip'></i>&nbsp;",
-            "label":"REST nested",
-            "type":"submenu",
-            "items":[
-              {
-                "label":"first",
-                "href":"",
-                "type":"link"
-              },{
-                "label":"sub",
-                "href":"/#rest-nested/sub",
-                "type":"collection",
-                "data": function(cb){
-                  // replace data with an ajax/rest call
-                  cb({
-                    title: "This is a collection",
-                    data:[
-                      {"name":"bar","age":12,"type":"human","sex":"male","likes fishing":"no"},
-                      {"name":"bar","age":13,"type":"human","sex":"male","likes fishing":"no"},
-                      {"name":"bar","age":14,"type":"human","sex":"male","likes fishing":"no"},
-                      {"name":"bar","age":15,"type":"human","sex":"male","likes fishing":"yes"},
-                      {"name":"bar","age":16,"type":"human","sex":"male","likes fishing":"yes"},
-                      {"name":"bar","age":17,"type":"human","sex":"male","likes fishing":"yes"},
-                      {"name":"bar","age":18,"type":"human","sex":"male","likes fishing":"yes"}
-                    ]
-                  });
-                }
+    require('domready')( function(){
+      riotadmin({
+        "project":{
+          "title": "riotadmin.io",
+          "logo": "<i class='fa fa-fw fa-globe'/>&nbsp;",
+          "url": "http://mylandingpage.com"
+        },
+        "menu":{
+          "items":[
+            {
+              "icon":"<i class='fa fa-fw fa-area-chart'></i>&nbsp;",
+              "label": "Home",
+              "href":"/foo",
+              "type":"link",
+              "tag": "home"
+            },
+            {
+              "icon":"<i class='fa fa-fw fa-fire'/></i>&nbsp;",
+              "label":"Sub items",
+              "type":"submenu",
+              "items": [
+                {"label": "bar1", "type":"link", href:"#/foo.html" },
+                {"label": "bar2", "type":"link", href:"#/foo2.html" }
+              ]
+            },{
+              "icon":"<i class='fa fa-fw fa-exchange'></i>&nbsp;",
+              "label":"REST items",
+              "href":"#/rest-items",
+              "type":"collection",
+              "data": function(cb,options){
+                // replace data with an ajax/rest call (use options object to pass on query,sort,order,limit,offset etc)
+                cb({
+                  title: "This is a collection",
+                  data:[
+                    {"name":"bar","age":12,"type":"human","sex":"male","likes fishing":"no"},
+                    {"name":"bar","age":13,"type":"human","sex":"male","likes fishing":"no"},
+                    {"name":"bar","age":14,"type":"human","sex":"male","likes fishing":"no"},
+                    {"name":"bar","age":15,"type":"human","sex":"male","likes fishing":"yes"},
+                    {"name":"bar","age":16,"type":"human","sex":"male","likes fishing":"yes"},
+                    {"name":"bar","age":17,"type":"human","sex":"male","likes fishing":"yes"},
+                    {"name":"bar","age":18,"type":"human","sex":"male","likes fishing":"yes"}
+                  ]
+                });
               }
-            ]
-          }
-        ]
-      },
-      "footer":{
-        "slogan": "Made with ♥ by <a href='https://riotadmin.io'>riotadmin.io</a>"
-      }
+            },{
+              "icon":"<i class='fa fa-fw fa-paperclip'></i>&nbsp;",
+              "label":"REST nested",
+              "type":"submenu",
+              "items":[
+                {
+                  "label":"first",
+                  "href":"",
+                  "type":"link"
+                },{
+                  "label":"sub",
+                  "href":"/#rest-nested/sub",
+                  "type":"collection",
+                  "data": function(cb){
+                    // replace data with an ajax/rest call
+                    cb({
+                      title: "Another collection",
+                      data:[
+                        {"name":"bar","age":12,"type":"human","sex":"male","likes fishing":"no"},
+                        {"name":"bar","age":13,"type":"human","sex":"male","likes fishing":"no"},
+                        {"name":"bar","age":14,"type":"human","sex":"male","likes fishing":"no"},
+                        {"name":"bar","age":15,"type":"human","sex":"male","likes fishing":"yes"},
+                        {"name":"bar","age":16,"type":"human","sex":"male","likes fishing":"yes"},
+                        {"name":"bar","age":17,"type":"human","sex":"male","likes fishing":"yes"},
+                        {"name":"bar","age":18,"type":"human","sex":"male","likes fishing":"yes"}
+                      ]
+                    });
+                  }
+                }
+              ]
+            },{
+              "icon":"<i class='fa fa-fw fa-area-chart'></i>&nbsp;",
+              "label": "Remote link",
+              "href":"/foo",
+              "target": "_blank",
+              "type":"link"
+            },
+          ]
+        },
+        "footer":{
+          "slogan": "Made with ♥ by <a href='https://riotadmin.io'>riotadmin.io</a>"
+        }
+      });
     });
   </script>
 

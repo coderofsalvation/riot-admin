@@ -14,47 +14,47 @@
   </table>
 
   <script>
-    var self = this
-    var EL = self.root
-    this.cols = []
-    this.rows = []
-    
-    this.on('update', function() {
-      
-    })
-
-    EL.load= function(newrows){
-      if( newrows == undefined || ! newrows.length ) return ;
-      self.cols = Object.keys(newrows[0]);
-      self.rows=newrows
+    self = this
+    EL = self.root
+    @cols = []
+    @rows = []
+    @on 'update', ->
+    EL.load = ((newrows) ->
+      if newrows == undefined or !newrows.length
+        return
+      self.cols = Object.keys(newrows[0])
+      self.rows = newrows
       self.update()
-    }.bind(this);
-
-    EL.append= function(newrows){
-      self.rows.push(newrows)
+      return
+    ).bind(this)
+    EL.append = ((newrows) ->
+      self.rows.push newrows
       self.update()
-    }.bind(this);
+      return
+    ).bind(this)
 
-    EL.reset = function(){
+    EL.reset = ->
       self.rows = []
       self.update()
-    }
+      return
 
-     
-    this.drawcell = function(rowdata, tr,  col) {
-      var idx = tr.root.children.length  //- index of the current painting cell
-      if(idx==0) return;
-      if( self.cols[idx-1].inner){
-        tr.root.children[idx-1].innerHTML=riot.util.tmpl( self.cols[idx-1].inner ,  rowdata )
-      }else{
-        tr.root.children[idx-1].innerHTML=rowdata[self.cols[idx-1].name ]
-      }
-    }.bind(this);
-
-    riot.tag('rcol', '', function(opts) {
-      var self = this
-      this.on('mount', function(){ self.root.style.display='none'; })
-    });
-
+    @drawcell = ((rowdata, tr, col) ->
+      idx = tr.root.children.length
+      #- index of the current painting cell
+      if idx == 0
+        return
+      if self.cols[idx - 1].inner
+        tr.root.children[idx - 1].innerHTML = riot.util.tmpl(self.cols[idx - 1].inner, rowdata)
+      else
+        tr.root.children[idx - 1].innerHTML = rowdata[self.cols[idx - 1].name]
+      return
+    ).bind(this)
+    riot.tag 'rcol', '', (opts) ->
+      `var self`
+      self = this
+      @on 'mount', ->
+        self.root.style.display = 'none'
+        return
+      return
   </script>
 </collection>

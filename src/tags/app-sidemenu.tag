@@ -17,22 +17,20 @@
   </div>
 
   <script>
+    expandsub = (el) ->
+      if el.target.parentElement.children[1] != undefined
+        el.target.parentElement.children[1].toggleClass 'expand'
+      return
 
-    expandsub(el) {
-      if( el.target.parentElement.children[1] != undefined )
-        el.target.parentElement.children[1].toggleClass("expand");
-    }
+    hide = ->
+      @sidedrawer.removeClass 'active'
+      document.body.removeClass 'hide-sidedrawer'
+      return
 
-    hide() {
-      this.sidedrawer.removeClass("active");  
-      document.body.removeClass('hide-sidedrawer');
-    }
-
-    toggle() {
-      this.sidedrawer.toggleClass("active");  
-      document.body.toggleClass('hide-sidedrawer');
-    }
-
+    toggle = ->
+      @sidedrawer.toggleClass 'active'
+      document.body.toggleClass 'hide-sidedrawer'
+      return
   </script>
 
 </app-sidemenu>

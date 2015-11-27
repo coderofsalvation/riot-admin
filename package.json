@@ -4,16 +4,23 @@
   "description": "generic api-agnostic admin dashboard interface, like ng-admin but less javascript-ish.",
   "main": "index.js",
   "scripts": {
-    "compile": "./bundle",
+    "compile": "./compile",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
-  "devDependencies":{
+  "devDependencies": {
+    "coffeeify": "^1.2.0",
     "css2js": "^0.1.4",
+    "domready": "^1.0.8",
+    "muicss": "^0.2.3",
+    "riotify": "^0.1.2",
     "riotjs": "^1.0.4",
+    "tape": "^4.2.2",
     "typeshave": "^0.3.0"
   },
   "dependencies": {
+    "nanobar": "^0.2.1",
+    "riot-routehandler": "^1.1.0"
   }
 }

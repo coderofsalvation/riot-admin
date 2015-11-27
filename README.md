@@ -1,5 +1,7 @@
 generic api-agnostic admin dashboard interface, like ng-admin but less javascript-ish.
 
+> NOTE: under construction / do not use
+
 <img alt="" src=".res/admin1.png"/>
 
 ## Usage 
