@@ -4,7 +4,7 @@
     <div class="mui-container-fluid" id="content">
       <div class="mui-row">
         <div class="mui-panel">
-          <routehandler></routehandler>
+          <routehandler id="router"></routerhandler>
         </div>
       </div>
     </div>
@@ -13,86 +13,55 @@
   <script>
     self = this
 
-    createPageFromLink = (config,page) ->
-      return if page.target != undefined or not page.tag? or not page.route?
-      config.routes.push { route: page.route, tag: page.tag }
-      #r page.href, ->
-      #  $('#content').addClass('fadeout').removeClass 'fadein'
-      #  self.opts.loadingbar.go 50
-      #  setTimeout (->
-      #    collection.reset()
-      #    self.update
-      #      title: page.label
-      #      body: ''
-      #      isFirst: false
-      #    $('#content').addClass('fadein').removeClass 'fadeout'
-      #    self.opts.loadingbar.go 100
-      #    return
-      #  ), 400
-      #  return
-      return
-
-    createPageFromCollection = (r, page) ->
-      return
-      r page.href, ->
-        $('#content').addClass('fadeout').removeClass 'fadein'
-        self.opts.loadingbar.go 50
-        setTimeout (->
-          self.update
-            title: ' '
-            body: ''
-            isFirst: false
-          page.data ((data) ->
-            self.collection.load data.data
-            self.title = data.title
-            self.update()
-            $('#content').addClass('fadein').removeClass 'fadeout'
-            self.opts.loadingbar.go 100
-            return
-          ),
-            query: ''
-            sort: 'foo'
-            order: 'asc'
-            limit: 20
-            offset: 0
+    @createPageFromCollection = (page) ->
+      riot.router page.href, (ctx,next) ->
+        self.router._tag.setTag page.tag, {config:opts, page: page} 
+        page.data ((data) ->
+          riot.mount 'collection', {config:opts, dataoptions: data, data:data.data, page:page}
+          riot.mount 'datatable', {id: page.id, options:data.options, data:data.data}
+          self.update()
+          self.opts.loadingbar.go 100
+          next()
           return
-        ), 400
+        ),
+          query: ''
+          sort: 'foo'
+          order: 'asc'
+          limit: 20
+          offset: 0
         return
       return
 
-    @setupPages = (config) ->
+    @getItems = (type) ->
       pages = []
       for i of opts.menu.items
         menuitem = opts.menu.items[i]
-        if menuitem.tag?
+        if menuitem.type? and menuitem.type == type
           pages.push menuitem
         if menuitem.items != undefined
           for j of menuitem.items
             subitem = menuitem.items[j]
-            if subitem.tag?
+            if subitem.type? and subitem.type == type
               pages.push subitem
-      for k of pages
-        p = pages[k]
+      return pages
+
+    @setupPages = () ->
+      pages = @getItems "collection"
+      for p in pages
         continue if not p.type?
         ((page) ->
-          console.dir page
-          switch page.type
-            when 'collection'
-              console.log "todo: collection" #createPageFromCollection r, page
-            when 'link'
-              createPageFromLink config, page
-            else
-              console.log 'unknown page type in menu:' + page.type
-              break
-          return
+          if page.type is 'collection'
+            self.createPageFromCollection page
+            console.dir page
         ) p
       return
 
     self.title = ''
     self.body = ''
-    @on 'mount', () =>
-      #@setupPages(config)
-
+    @on 'mount', () ->
+      riot.mount 'routehandler', opts
+      riot.router = @router._tag.page
+      self.setupPages()
       return
   </script>
 

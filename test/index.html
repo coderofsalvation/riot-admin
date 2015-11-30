@@ -6,12 +6,19 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
+  <!-- bare minimum includes -->
   <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
   <script src="https://cdn.rawgit.com/riot/riot/master/riot+compiler.min.js"></script>
   <script src="/js/riot-admin.min.js"></script>
 
+  <!-- optional includes -->
+  <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+  <script type="text/javascript" src="https://cdn.datatables.net/1.10.10/js/jquery.dataTables.min.js"></script>
+  <link href="/css/datatables.css" rel="stylesheet" type="text/css" />
+
   <script type="text/javascript">
     require('domready')( function(){
+      console.dir($);
       riotadmin({
         "project":{
           "title": "riotadmin.io",
@@ -19,8 +26,8 @@
           "url": "http://mylandingpage.com"
         },
         "routes":[
-          { route:"/" ,       tag:"home" },
-          { route:"/bar/:id" ,tag:"bar1" },
+          { route:"/"                     ,tag:"home" },
+          { route:"/bar/:id"              ,tag:"bar1" }
         ],
         routeroptions: { hashbang: true },
         "menu":{
@@ -40,13 +47,13 @@
               ]
             },{
               "icon":"<i class='fa fa-fw fa-exchange'></i>&nbsp;",
-              "label":"REST items",
-              "href":"#/rest-items",
               "type":"collection",
+              "label":"REST items",
+              "tag":"rest-collection",
+              "href":"/rest-collection",
               "data": function(cb,options){
                 // replace data with an ajax/rest call (use options object to pass on query,sort,order,limit,offset etc)
                 cb({
-                  title: "This is a collection",
                   data:[
                     {"name":"bar","age":12,"type":"human","sex":"male","likes fishing":"no"},
                     {"name":"bar","age":13,"type":"human","sex":"male","likes fishing":"no"},
@@ -59,35 +66,41 @@
                 });
               }
             },{
-              "icon":"<i class='fa fa-fw fa-paperclip'></i>&nbsp;",
-              "label":"REST nested",
-              "type":"submenu",
-              "items":[
-                {
-                  "label":"first",
-                  "href":"",
-                  "type":"link"
-                },{
-                  "label":"sub",
-                  "href":"/#rest-nested/sub",
-                  "type":"collection",
-                  "data": function(cb){
-                    // replace data with an ajax/rest call
-                    cb({
-                      title: "Another collection",
-                      data:[
-                        {"name":"bar","age":12,"type":"human","sex":"male","likes fishing":"no"},
-                        {"name":"bar","age":13,"type":"human","sex":"male","likes fishing":"no"},
-                        {"name":"bar","age":14,"type":"human","sex":"male","likes fishing":"no"},
-                        {"name":"bar","age":15,"type":"human","sex":"male","likes fishing":"yes"},
-                        {"name":"bar","age":16,"type":"human","sex":"male","likes fishing":"yes"},
-                        {"name":"bar","age":17,"type":"human","sex":"male","likes fishing":"yes"},
-                        {"name":"bar","age":18,"type":"human","sex":"male","likes fishing":"yes"}
-                      ]
-                    });
-                  }
-                }
-              ]
+              "icon":"<i class='fa fa-fw fa-exchange'></i>&nbsp;",
+              "label":"REST items (dt)",
+              "href":"/rest-collection-dt",
+              "type":"collection",
+              "tag":"rest-collection-dt",
+              "id": "flop",
+              "data": function(cb,options){
+                // replace data with an ajax/rest call (use options object to pass on query,sort,order,limit,offset etc)
+                cb({
+                  options: {
+                    "order": [[1,"desc"]]
+                  },
+                  data:[
+                    {"name":"bar","age":12,"type":"human","sex":"male","likes fishing":"no"},
+                    {"name":"bar","age":13,"type":"human","sex":"male","likes fishing":"no"},
+                    {"name":"bar","age":14,"type":"human","sex":"male","likes fishing":"no"},
+                    {"name":"bar","age":15,"type":"human","sex":"male","likes fishing":"yes"},
+                    {"name":"bar","age":12,"type":"human","sex":"male","likes fishing":"no"},
+                    {"name":"bar","age":12,"type":"human","sex":"male","likes fishing":"no"},
+                    {"name":"bar","age":13,"type":"human","sex":"male","likes fishing":"no"},
+                    {"name":"bar","age":14,"type":"human","sex":"male","likes fishing":"no"},
+                    {"name":"bar","age":15,"type":"human","sex":"male","likes fishing":"yes"},
+                    {"name":"bar","age":16,"type":"human","sex":"male","likes fishing":"yes"},
+                    {"name":"bar","age":17,"type":"human","sex":"male","likes fishing":"yes"},
+                    {"name":"bar","age":13,"type":"human","sex":"male","likes fishing":"no"},
+                    {"name":"bar","age":14,"type":"human","sex":"male","likes fishing":"no"},
+                    {"name":"bar","age":15,"type":"human","sex":"male","likes fishing":"yes"},
+                    {"name":"bar","age":16,"type":"human","sex":"male","likes fishing":"yes"},
+                    {"name":"bar","age":17,"type":"human","sex":"male","likes fishing":"yes"},
+                    {"name":"bar","age":16,"type":"human","sex":"male","likes fishing":"yes"},
+                    {"name":"bar","age":17,"type":"human","sex":"male","likes fishing":"yes"},
+                    {"name":"bar","age":18,"type":"human","sex":"male","likes fishing":"yes"}
+                  ]
+                });
+              }
             },{
               "icon":"<i class='fa fa-fw fa-area-chart'></i>&nbsp;",
               "label": "Remote link",
@@ -131,10 +144,15 @@
         Lorem ipsum dolor sit amet.<br>
       </bar1>
 
-      <rest-items>
-        <h1>Rest items</h1>
+      <rest-collection>
+        <h1>REST items simple</h1>
         <collection/>
-      </rest-items>
+      </rest-collection>
+
+      <rest-collection-dt>
+        <h1>REST datatables</h1>
+        <datatable/>
+      </rest-collection-dt>
 
     </script>
 

@@ -8,6 +8,7 @@ browserify -t coffeeify \
   node_modules/riotjs/riot.min.js \
   node_modules/muicss/dist/css/mui.min.css.js \
   node_modules/muicss/dist/js/mui.min.js \
+  node_modules/riot-datatables/riot-datatables.min.js \
   -r riot-routehandler \
   -r nanobar \
   lib/tags.js \

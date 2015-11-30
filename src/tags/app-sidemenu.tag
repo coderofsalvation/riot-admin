@@ -28,7 +28,7 @@
       document.body.removeClass 'hide-sidedrawer'
       return
 
-    @toggle = ->
+    @toggle = =>
       @sidedrawer.toggleClass 'active'
       document.body.toggleClass 'hide-sidedrawer'
       return

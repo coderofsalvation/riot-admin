@@ -78,3 +78,8 @@ finally this will bundle everything into `dist/riot-admin.js`
 * extend to own flavor
 * no steep javascript learning curve (ng-admin)
 * you need to provide data using ajax/rest/websocket etc
+
+## api
+
+* `$_` reference to document.querySelector        
+* `$$_` reference to document.querySelectorAll : 

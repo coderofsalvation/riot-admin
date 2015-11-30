@@ -34,8 +34,8 @@ riotadmin = typesafe({
     ###
     # utility prototype functions  etc
     ###
-    window.$ = document.querySelector.bind(document)
-    window.$$ = document.querySelectorAll.bind(document)
+    window.$_ = document.querySelector.bind(document)
+    window.$$_ = document.querySelectorAll.bind(document)
 
     Element::hasClass = (className) ->
       new RegExp('(\\s|^)' + className + '(\\s|$)').test @getAttribute('class')
@@ -74,9 +74,9 @@ riotadmin = typesafe({
       '*': (ctx,next) ->
         if window.url != ctx.canonicalPath 
           window.url = ctx.canonicalPath
-          $('#content').addClass('fadeout').removeClass('fadein')
+          $_('#content').addClass('fadeout').removeClass('fadein')
           setTimeout () ->
-            $('#content').addClass('fadein').removeClass('fadeout')
+            $_('#content').addClass('fadein').removeClass('fadeout')
             window.loadingbar.go 100
             next();
           ,400
@@ -85,19 +85,18 @@ riotadmin = typesafe({
     # mount the tags
     ###
     @tags = riot.mount('*', config)
-    rh = riot.mount 'routehandler', config 
 
     ###
     # setup events 
     ###
-    $bodyEl = $('body')
-    $sidedrawerEl = $('#sidedrawer')
-    if !$('.js-show-sidedrawer')
+    $bodyEl = $_('body')
+    $sidedrawerEl = $_('#sidedrawer')
+    if !$_('.js-show-sidedrawer')
       console.error 'sidedrawer menu not loaded..tags loaded properly?'
 
-    $('.js-show-sidedrawer').addEventListener 'click', $('app-sidemenu')._tag.toggle
-    $('#sidedrawer-toggler-xs').addEventListener 'click', $('app-sidemenu')._tag.toggle
-    $('#content').addClass 'fadein'
+    $_('.js-show-sidedrawer').addEventListener 'click', $_('app-sidemenu')._tag.toggle
+    $_('#sidedrawer-toggler-xs').addEventListener 'click', $_('app-sidemenu')._tag.toggle
+    $_('#content').addClass 'fadein'
     
     return
   return
