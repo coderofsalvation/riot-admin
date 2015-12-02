@@ -1,1 +1,0 @@
-../../node_modules/riot-routehandler/lib/routehandler.js
