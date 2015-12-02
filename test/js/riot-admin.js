@@ -1,0 +1,1 @@
+../../src/riot-admin.js
