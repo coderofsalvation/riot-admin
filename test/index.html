@@ -47,31 +47,28 @@
               ]
             },{
               "icon":"<i class='fa fa-fw fa-exchange'></i>&nbsp;",
-              "type":"collection",
-              "label":"REST items",
-              "tag":"rest-collection",
-              "href":"/rest-collection",
-              "data": function(cb,options){
-                // replace data with an ajax/rest call (use options object to pass on query,sort,order,limit,offset etc)
-                cb({
-                  data:[
-                    {"name":"bar","age":12,"type":"human","sex":"male","likes fishing":"no"},
-                    {"name":"bar","age":13,"type":"human","sex":"male","likes fishing":"no"},
-                    {"name":"bar","age":14,"type":"human","sex":"male","likes fishing":"no"},
-                    {"name":"bar","age":15,"type":"human","sex":"male","likes fishing":"yes"},
-                    {"name":"bar","age":16,"type":"human","sex":"male","likes fishing":"yes"},
-                    {"name":"bar","age":17,"type":"human","sex":"male","likes fishing":"yes"},
-                    {"name":"bar","age":18,"type":"human","sex":"male","likes fishing":"yes"}
-                  ]
-                });
-              }
-            },{
-              "icon":"<i class='fa fa-fw fa-exchange'></i>&nbsp;",
               "label":"REST items (dt)",
-              "href":"/rest-collection-dt",
+              "href":"/my-rest-collection-dt",
               "type":"collection",
-              "tag":"rest-collection-dt",
-              "id": "flop",
+              "tag":"rest-collection-dt", // change this to 'rest-collection' for a nonjquery mobile version
+              "id": "my-rest-collection-dt",
+              "edit": {
+                "schema": {
+                  title: "Edit item",
+                  type: "object",
+                  properties: {
+                    "id":   { title:"Id","type": "integer", hidden:true },
+                    "name": { title:"Name","type": "string" },
+                    "age":  { title:"Age","type": "integer" },
+                    "sex":  { title:"Sex","type": "string", enum:["male","female","unknown"] },
+                    "likes fishing": { title:"Likes fishing","type": "string", enum:["no","yes"] }
+                  }
+                },
+                "onSave": function(data,cb){ 
+                   alert(JSON.stringify(data,null,2)); 
+                   cb(true,"item saved :)"); 
+                }
+              },
               "data": function(cb,options){
                 // replace data with an ajax/rest call (use options object to pass on query,sort,order,limit,offset etc)
                 cb({
@@ -79,25 +76,25 @@
                     "order": [[1,"desc"]]
                   },
                   data:[
-                    {"name":"bar","age":12,"type":"human","sex":"male","likes fishing":"no"},
-                    {"name":"bar","age":13,"type":"human","sex":"male","likes fishing":"no"},
-                    {"name":"bar","age":14,"type":"human","sex":"male","likes fishing":"no"},
-                    {"name":"bar","age":15,"type":"human","sex":"male","likes fishing":"yes"},
-                    {"name":"bar","age":12,"type":"human","sex":"male","likes fishing":"no"},
-                    {"name":"bar","age":12,"type":"human","sex":"male","likes fishing":"no"},
-                    {"name":"bar","age":13,"type":"human","sex":"male","likes fishing":"no"},
-                    {"name":"bar","age":14,"type":"human","sex":"male","likes fishing":"no"},
-                    {"name":"bar","age":15,"type":"human","sex":"male","likes fishing":"yes"},
-                    {"name":"bar","age":16,"type":"human","sex":"male","likes fishing":"yes"},
-                    {"name":"bar","age":17,"type":"human","sex":"male","likes fishing":"yes"},
-                    {"name":"bar","age":13,"type":"human","sex":"male","likes fishing":"no"},
-                    {"name":"bar","age":14,"type":"human","sex":"male","likes fishing":"no"},
-                    {"name":"bar","age":15,"type":"human","sex":"male","likes fishing":"yes"},
-                    {"name":"bar","age":16,"type":"human","sex":"male","likes fishing":"yes"},
-                    {"name":"bar","age":17,"type":"human","sex":"male","likes fishing":"yes"},
-                    {"name":"bar","age":16,"type":"human","sex":"male","likes fishing":"yes"},
-                    {"name":"bar","age":17,"type":"human","sex":"male","likes fishing":"yes"},
-                    {"name":"bar","age":18,"type":"human","sex":"male","likes fishing":"yes"}
+                    {"id":1,"name":"bar","age":12,"type":"human","sex":"male","likes fishing":"no"},
+                    {"id":2,"name":"bar","age":13,"type":"human","sex":"male","likes fishing":"no"},
+                    {"id":3,"name":"bar","age":14,"type":"human","sex":"male","likes fishing":"no"},
+                    {"id":4,"name":"bar","age":15,"type":"human","sex":"male","likes fishing":"yes"},
+                    {"id":5,"name":"bar","age":12,"type":"human","sex":"male","likes fishing":"no"},
+                    {"id":6,"name":"bar","age":12,"type":"human","sex":"male","likes fishing":"no"},
+                    {"id":7,"name":"bar","age":13,"type":"human","sex":"male","likes fishing":"no"},
+                    {"id":8,"name":"bar","age":14,"type":"human","sex":"male","likes fishing":"no"},
+                    {"id":9,"name":"bar","age":15,"type":"human","sex":"male","likes fishing":"yes"},
+                    {"id":10,"name":"bar","age":16,"type":"human","sex":"male","likes fishing":"yes"},
+                    {"id":11,"name":"bar","age":17,"type":"human","sex":"male","likes fishing":"yes"},
+                    {"id":12,"name":"bar","age":13,"type":"human","sex":"male","likes fishing":"no"},
+                    {"id":13,"name":"bar","age":14,"type":"human","sex":"male","likes fishing":"no"},
+                    {"id":14,"name":"bar","age":15,"type":"human","sex":"male","likes fishing":"yes"},
+                    {"id":15,"name":"bar","age":16,"type":"human","sex":"male","likes fishing":"yes"},
+                    {"id":16,"name":"bar","age":17,"type":"human","sex":"male","likes fishing":"yes"},
+                    {"id":17,"name":"bar","age":16,"type":"human","sex":"male","likes fishing":"yes"},
+                    {"id":18,"name":"bar","age":17,"type":"human","sex":"male","likes fishing":"yes"},
+                    {"id":19,"name":"bar","age":18,"type":"human","sex":"male","likes fishing":"yes"}
                   ]
                 });
               }
@@ -124,6 +121,7 @@
     <app-header></app-header>
     <app-main></app-main>
     <app-footer></app-footer>
+    <app-modal id="edit"></app-modal>
 
     <!-- customize templates here -->
     <script type="riot/tag">
@@ -144,15 +142,17 @@
         Lorem ipsum dolor sit amet.<br>
       </bar1>
 
+      <rest-collection-dt>
+        <h1>REST datatables</h1>
+        <datatable/>
+      </rest-collection-dt>
+
+      <!-- for mobile / nonjquery use this native collection element -->
       <rest-collection>
         <h1>REST items simple</h1>
         <collection/>
       </rest-collection>
 
-      <rest-collection-dt>
-        <h1>REST datatables</h1>
-        <datatable/>
-      </rest-collection-dt>
 
     </script>
 

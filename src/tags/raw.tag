@@ -1,4 +1,6 @@
 <raw>
   <span></span>
-  @root.innerHTML = opts.content
+
+  @on 'update', () ->
+    @root.innerHTML = opts.content
 </raw>

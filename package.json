@@ -13,14 +13,16 @@
     "coffeeify": "^1.2.0",
     "css2js": "^0.1.4",
     "domready": "^1.0.8",
+    "jsonschema2form": "^1.0.1",
     "muicss": "^0.2.3",
+    "nanobar": "^0.2.1",
+    "notification-fallback": "^1.0.1",
+    "riot-routehandler": "git+https://github.com/coderofsalvation/riot-routehandler.git",
     "riotify": "^0.1.2",
     "riotjs": "^1.0.4",
     "tape": "^4.2.2",
-    "typeshave": "^0.3.0"
+    "typeshave": "^0.3.0",
+    "watchmakers": "^1.0.1"
   },
-  "dependencies": {
-    "nanobar": "^0.2.1",
-    "riot-routehandler": "git+https://github.com/coderofsalvation/riot-routehandler.git"
-  }
+  "dependencies": {}
 }

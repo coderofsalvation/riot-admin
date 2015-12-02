@@ -1,6 +1,6 @@
 <collection>
   <collection-header/>
-  <table class="mui-table mui-table--bordered"> 
+  <table id={ opts.id } class="mui-table mui-table--bordered"> 
     <thead>
       <tr > 
         <th each="{ colkey, colval in rows[0] }" >{ colkey }</th>

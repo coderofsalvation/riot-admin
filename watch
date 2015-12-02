@@ -1,3 +1,8 @@
 #!/bin/bash 
 
-watchexec src ./compile
+( killall php; cd test; php -S 0.0.0.0:5000; ) &
+
+node_modules/.bin/watchmakers                                            \
+  "$(pwd)/src:$(pwd)/compile"                                            \
+  "$(pwd)/node_modules/jsonschema2form-nested/src:npm run-script compile"    \
+  "$(pwd)/node_modules/riot-datatables:npm run-script compile"           

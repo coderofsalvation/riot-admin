@@ -1,10 +1,10 @@
 nanobar      = require 'nanobar'
 routehandler = require 'riot-routehandler'
+require 'notification-fallback'
 
 typeshave = require('typeshave')
 typeshave.verbose = 1
 typesafe = typeshave.typesafe
-
 
 riotadmin = typesafe({
   'type': 'object'
@@ -58,8 +58,9 @@ riotadmin = typesafe({
         @addClass className
       this
 
-    Element::appendTo = (el) ->
+    Element::appendTo = (el,move) ->
       el.innerHTML = el.innerHTML + @innerHTML
+      @innerHTML = "" if move
       return
 
     Element::hide = ->
@@ -98,6 +99,9 @@ riotadmin = typesafe({
     $_('#sidedrawer-toggler-xs').addEventListener 'click', $_('app-sidemenu')._tag.toggle
     $_('#content').addClass 'fadein'
     
+    setTimeout () ->
+      Notification.requestPermission()
+    ,20000
     return
   return
 )

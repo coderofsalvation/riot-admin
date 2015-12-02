@@ -1,3 +1,7 @@
+#!/bin/bash
+SELFDIR="$(dirname "$(readlink -f "$0")" )"
+cd $SELFDIR 
+
 riot src/tags lib/tags.js --type coffeescript
 .hooks/pre-commit # compile coffeescript to js
 node_modules/css2js/css2js --css=src/riot-admin.css --out=lib/riot-admin.css.js --template=vanilla_runner
@@ -14,4 +18,5 @@ browserify -t coffeeify \
   lib/tags.js \
   lib/riot-admin.js \
   lib/riot-admin.css.js > dist/riot-admin.min.js #| uglifyjs -o dist/riot-admin.min.js
-[[ -f ~/bin/notify.wav ]] && play ~/bin/notify.wav reverse
+#[[ -f ~/tmp/squeak.wav ]] && play ~/tmp/squeak.wav gain -10
+[[ -f ~/bin/notify.wav ]] && play ~/bin/notify.wav reverse gain -10
