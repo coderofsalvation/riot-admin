@@ -83,19 +83,21 @@ riotadmin.init = typesafe
     # set page transition
     ###
     #
-    config.routeroptions.pagehandlers = 
-      '*': (ctx,next) ->
+    config.routes.unshift
+      route: '*', 
+      use: (ctx,next,page) ->
         console.dir ctx
         if window.url != ctx.canonicalPath 
           window.url = ctx.canonicalPath
           $_('#content').addClass('fadeout').removeClass('fadein')
           setTimeout () ->
-            riotadmin.trigger window.url 
+            #riotadmin.trigger window.url 
             $_('#content').addClass('fadein').removeClass('fadeout')
             window.loadingbar.go 100
             next();
           ,400
         else next();
+    console.dir config.routes
     ###
     # mount the tags
     ###

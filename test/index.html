@@ -48,10 +48,10 @@
             },{
               "icon":"<i class='fa fa-fw fa-exchange'></i>&nbsp;",
               "label":"REST items (dt)",
-              "href":"/my-rest-collection-dt",
+              "href":"/my-rest-collection",
               "type":"collection",
-              "tag":"rest-collection-dt", // change this to 'rest-collection' for a nonjquery mobile version
-              "id": "my-rest-collection-dt",
+              "tag":"rest-collection", 
+              "id": "my-rest-collection",
               "edit": {
                 "schema": {
                   title: "Edit item",
@@ -134,22 +134,26 @@
         <h1>Welcome to { opts.project.title }</h3>
         <div class="mui-row">
           <div class="mui-col-md-6">
-            <gauge type="big" total="3680" value="1234" postfix=" props"/>
+            <div class="mui-panel center">
+              <gauge type="big" total="3680" value="1234" postfix=" orders total"/>
+            </div>
           </div>
           <div class="mui-col-md-6">
-            <gauge type="big" total="123" value="30" postfix=" orders this week"/>
+            <div class="mui-panel center">
+              <gauge type="big" total="123" value="30" postfix=" orders this week"/>
+            </div>
           </div>
-          <div class="mui-col-md-3">
-            <gauge type="small" total="100" value="40" postfix="costs vs revenue"/>
+          <div class="mui-col-md-6">
+            <div class="mui-panel center">
+              <gauge type="small" total="100" value="40" hidevalue="true" postfix="costs vs revenue"/>
+              <gauge type="small" total="180" value="80" postfix=" booking errors"/>
+            </div>
           </div>
-          <div class="mui-col-md-3">
-            <gauge type="small" total="180" value="80" postfix=" booking errors"/>
-          </div>
-          <div class="mui-col-md-3">
-            <gauge type="small" total="100" value="75" postfix=" items processed"/>
-          </div>
-          <div class="mui-col-md-3">
-            <gauge type="small" total="100" value="13" postfix=" open issues"/>
+          <div class="mui-col-md-6">
+            <div class="mui-panel center">
+              <gauge type="small" total="100" value="75" postfix=" items processed"/>
+              <gauge type="small" total="100" value="13" postfix=" open issues"/>
+            </div>
           </div>
         </div>
         Lorem ipsum dolor sit amet.<br>
@@ -165,15 +169,12 @@
         Lorem ipsum dolor sit amet.<br>
       </bar1>
 
-      <rest-collection-dt>
+      <rest-collection>
         <h1>REST datatables</h1>
         <datatable/>
-      </rest-collection-dt>
-
-      <!-- for mobile / nonjquery use this native collection element -->
-      <rest-collection>
-        <h1>REST items simple</h1>
-        <collection/>
+        <!--
+           -<collection/> <- this doesn't require jquery (for mobile e.g.)
+           -->
       </rest-collection>
 
     </script>

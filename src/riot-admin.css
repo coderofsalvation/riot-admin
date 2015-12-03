@@ -110,6 +110,10 @@ buttons {
   }
 }
 
+.center {
+  text-align: center
+}
+
 
 /**
  * Toggle Sidedrawer
@@ -290,10 +294,11 @@ opacity:0;
 /* CSS3 Gauges */
 
 .gauge-container-big {
+  display: inline-block;
   width: 400px;
   height: 200px;
   margin-left: 200px;
-  margin-top: 75px;
+  margin-top: 100px;
   position: relative;
   overflow: hidden;
   text-align: center;
@@ -303,7 +308,7 @@ opacity:0;
 .gauge-a-big {
   z-index: 1;
   position: absolute;
-  background-color: rgba(255,255,255,.2);
+  background-color: rgba(127,177,255,0.1);
   width: 400px;
   height: 200px;
   top: 0%;
@@ -325,7 +330,7 @@ opacity:0;
 .gauge-c-big {
   z-index: 2;
   position: absolute;
-  background-color: #5664F9;
+  background-color: rgba(0,127,254,0.5);
   width: 400px;
   height: 200px;
   top: 200px;
@@ -340,12 +345,12 @@ opacity:0;
 
 .gauge-data-big {
   z-index: 4;
-  color: rgba(255,255,255,.5);
+  color: rgba(255,255,255,.66);
   font-size: 1.5em;
   line-height: 125px;
   position: absolute;
   width: 400px;
-  height: 200px;
+  height: 125px;
   top: 90px;
   margin-left: auto;
   margin-right: auto;
@@ -356,7 +361,7 @@ opacity:0;
   width: 200px;
   height: 100px;
   margin-left: 100px;
-  margin-top: 0px;
+  margin-top: 50px;
   position: relative;
   overflow: hidden;
   text-align: center;
@@ -366,7 +371,7 @@ opacity:0;
 .gauge-a-small {
   z-index: 1;
   position: absolute;
-  background-color: rgba(255,255,255,.2);
+  background-color: rgba(127,177,255,0.1);
   width: 200px;
   height: 100px;
   top: 0%;
@@ -388,7 +393,7 @@ opacity:0;
 .gauge-c-small {
   z-index: 2;
   position: absolute;
-  background-color: #5664F9;
+  background-color: rgba(0,127,254,0.5);
   width: 200px;
   height: 100px;
   top: 100px;
@@ -402,16 +407,35 @@ opacity:0;
 .gauge-container-small:hover .gauge-data-small { color: rgba(255,255,255,1); }
 
 .gauge-data-small {
+  display: inline-block;
   z-index: 4;
-  color: rgba(255,255,255,.5);
-  font-size: 0.95em;
+  color: rgba(255,255,255,.66);
+  font-size: 1.0em;
   line-height: 75px;
-  position: absolute;
+  position: relative;
   width: 200px;
-  height: 100px;
+  height: 75px;
   top: 45px;
   margin-left: auto;
   margin-right: auto;
   transition: all 1s ease-out;
 }
 
+.gauge-spacer {
+  display:block;
+
+}
+
+.gauge-small {
+  display:inline-block;
+  overflow: hidden;
+  height:100px;
+  width: 220px;
+}
+
+.gauge-big {
+  display:inline-block;
+  overflow: hidden;
+  height:200px;
+  width: 440px;
+}
