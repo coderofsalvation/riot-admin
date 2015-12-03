@@ -13,13 +13,13 @@
 
   <!-- optional includes -->
   <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+  <script type="text/javascript" src="http://benpickles.github.io/peity/jquery.peity.min.js"></script>
   <script type="text/javascript" src="https://cdn.datatables.net/1.10.10/js/jquery.dataTables.min.js"></script>
   <link href="/css/datatables.css" rel="stylesheet" type="text/css" />
 
   <script type="text/javascript">
     require('domready')( function(){
-      console.dir($);
-      riotadmin({
+      riotadmin.init({
         "project":{
           "title": "riotadmin.io",
           "logo": "<i class='fa fa-fw fa-globe'/>&nbsp;",
@@ -111,6 +111,10 @@
           "slogan": "Made with ♥ by <a href='https://riotadmin.io'>riotadmin.io</a>"
         }
       });
+
+      riotadmin.on('/', function(){
+        console.log("i just changed navigation");
+      });
     });
   </script>
 
@@ -128,7 +132,26 @@
 
       <home>
         <h1>Welcome to { opts.project.title }</h3>
-        Lorem ipsum dolor sit amet.<br>
+        <div class="mui-row">
+          <div class="mui-col-md-6">
+            <gauge type="big" total="3680" value="1234" postfix=" props"/>
+          </div>
+          <div class="mui-col-md-6">
+            <gauge type="big" total="123" value="30" postfix=" orders this week"/>
+          </div>
+          <div class="mui-col-md-3">
+            <gauge type="small" total="100" value="40" postfix="costs vs revenue"/>
+          </div>
+          <div class="mui-col-md-3">
+            <gauge type="small" total="180" value="80" postfix=" booking errors"/>
+          </div>
+          <div class="mui-col-md-3">
+            <gauge type="small" total="100" value="75" postfix=" items processed"/>
+          </div>
+          <div class="mui-col-md-3">
+            <gauge type="small" total="100" value="13" postfix=" open issues"/>
+          </div>
+        </div>
         Lorem ipsum dolor sit amet.<br>
         Lorem ipsum dolor sit amet.<br>
       </home>
@@ -152,7 +175,6 @@
         <h1>REST items simple</h1>
         <collection/>
       </rest-collection>
-
 
     </script>
 

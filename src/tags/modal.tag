@@ -2,15 +2,11 @@
   <div id="content" style="display:none">
     <div class="mui-container">
       <div class="mui-row">
-        <div class="mui-col-md-1">&nbsp;</div>
-        <div class="mui-col-md-4">
+        <div class="mui-col-md-12">
           <h1>{ this.title }</h1>
-          <raw content={ html }/>
         </div>
-        <div class="mui-col-md-2">&nbsp;</div>
-        <div class="mui-col-md-4">
-        <div class="mui-col-md-1">&nbsp;</div>
       </div>
+      <raw content={ html }/>
     </div>
   </div>
 

@@ -286,3 +286,132 @@ opacity:0;
     from { opacity: 1; }
     to   { opacity: 0; }
 }
+
+/* CSS3 Gauges */
+
+.gauge-container-big {
+  width: 400px;
+  height: 200px;
+  margin-left: 200px;
+  margin-top: 75px;
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+  transform: translate(-50%, -50%);
+}
+
+.gauge-a-big {
+  z-index: 1;
+  position: absolute;
+  background-color: rgba(255,255,255,.2);
+  width: 400px;
+  height: 200px;
+  top: 0%;
+  border-radius: 250px 250px 0px 0px;
+}
+
+.gauge-b-big {
+  z-index: 3;
+  position: absolute;
+  background-color: #222;
+  width: 250px;
+  height: 125px;
+  top: 75px;
+  margin-left: 75px;
+  margin-right: auto;
+  border-radius: 250px 250px 0px 0px;
+}
+
+.gauge-c-big {
+  z-index: 2;
+  position: absolute;
+  background-color: #5664F9;
+  width: 400px;
+  height: 200px;
+  top: 200px;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 0px 0px 200px 200px;
+  transform-origin: center top;
+  transition: all 1.3s ease-in-out;
+}
+
+.gauge-container-big:hover .gauge-data-big { color: rgba(255,255,255,1); }
+
+.gauge-data-big {
+  z-index: 4;
+  color: rgba(255,255,255,.5);
+  font-size: 1.5em;
+  line-height: 125px;
+  position: absolute;
+  width: 400px;
+  height: 200px;
+  top: 90px;
+  margin-left: auto;
+  margin-right: auto;
+  transition: all 1s ease-out;
+}
+
+.gauge-container-small {
+  width: 200px;
+  height: 100px;
+  margin-left: 100px;
+  margin-top: 0px;
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+  transform: translate(-50%, -50%);
+}
+
+.gauge-a-small {
+  z-index: 1;
+  position: absolute;
+  background-color: rgba(255,255,255,.2);
+  width: 200px;
+  height: 100px;
+  top: 0%;
+  border-radius: 125px 125px 0px 0px;
+}
+
+.gauge-b-small {
+  z-index: 3;
+  position: absolute;
+  background-color: #222;
+  width: 125px;
+  height: 75px;
+  top: 37px;
+  margin-left: 37px;
+  margin-right: auto;
+  border-radius: 125px 125px 0px 0px;
+}
+
+.gauge-c-small {
+  z-index: 2;
+  position: absolute;
+  background-color: #5664F9;
+  width: 200px;
+  height: 100px;
+  top: 100px;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 0px 0px 100px 100px;
+  transform-origin: center top;
+  transition: all 1.3s ease-in-out;
+}
+
+.gauge-container-small:hover .gauge-data-small { color: rgba(255,255,255,1); }
+
+.gauge-data-small {
+  z-index: 4;
+  color: rgba(255,255,255,.5);
+  font-size: 0.95em;
+  line-height: 75px;
+  position: absolute;
+  width: 200px;
+  height: 100px;
+  top: 45px;
+  margin-left: auto;
+  margin-right: auto;
+  transition: all 1s ease-out;
+}
+

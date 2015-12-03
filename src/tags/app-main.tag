@@ -26,10 +26,17 @@
             for row in $$_('#'+page.id+' tbody tr')
               row.addEventListener 'click', ( (dataitem) ->
                 (e) ->
-                  $_("#edit")._tag.show page.edit.schema.title, '''
-                    <form id='form'></form>
-                    <button type='submit' id="formsubmit" class='mui-btn mui-btn--raised'>Save</button>
+                  html = '''
+                    <div class="mui-row">
+                      <form id='form'></form>
+                    </div>
+                    <div class="mui-row">
+                      <div class="mui-col-md-12">
+                        <button type='submit' id="formsubmit" class='mui-btn mui-btn--raised'>Save</button>
                   '''
+                  html += "<button type='submit' id='formdelete' class='mui-btn mui-btn--raised'>Delete</button>" if dataitem.id?
+                  html += '</div></div>'
+                  $_("#edit")._tag.show page.edit.schema.title, html
                   jfn.render 
                     element: $_("#form")
                     data: dataitem
@@ -73,9 +80,7 @@
       for p in pages
         continue if not p.type?
         ((page) ->
-          if page.type is 'collection'
-            self.createPageFromCollection page
-            console.dir page
+          self.createPageFromCollection page if page.type is 'collection'
         ) p
       return
 

@@ -6,7 +6,19 @@ typeshave = require('typeshave')
 typeshave.verbose = 1
 typesafe = typeshave.typesafe
 
-riotadmin = typesafe({
+riotadmin = 
+  listeners: {}
+
+riotadmin.on = (event,listener) ->
+  if not riotadmin.listeners[event]?
+    riotadmin.listeners[event] = []
+  riotadmin.listeners[event].push listener
+
+riotadmin.trigger = (event,data) ->
+  if riotadmin.listeners[event]?
+    listener(data) for listener in riotadmin.listeners[event]
+
+riotadmin.init = typesafe
   'type': 'object'
   'properties':
     'project':
@@ -25,7 +37,7 @@ riotadmin = typesafe({
       'properties': 'slogan':
         'type': 'string'
         'required': true
-}, (config) ->
+, (config) ->
   riot.compile ->
     window.loadingbar = config.loadingbar = new nanobar({bg: '#333'})
     #riot.route.base '/'
@@ -73,10 +85,12 @@ riotadmin = typesafe({
     #
     config.routeroptions.pagehandlers = 
       '*': (ctx,next) ->
+        console.dir ctx
         if window.url != ctx.canonicalPath 
           window.url = ctx.canonicalPath
           $_('#content').addClass('fadeout').removeClass('fadein')
           setTimeout () ->
+            riotadmin.trigger window.url 
             $_('#content').addClass('fadein').removeClass('fadeout')
             window.loadingbar.go 100
             next();
@@ -104,7 +118,5 @@ riotadmin = typesafe({
     ,20000
     return
   return
-)
-
 
 window.riotadmin = riotadmin if window?

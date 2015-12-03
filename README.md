@@ -73,11 +73,16 @@ finally this will bundle everything into `dist/riot-admin.js`
 
 ## Philosophy
 
-* built to re-use
 * configure from json 
-* extend to own flavor
-* no steep javascript learning curve (ng-admin)
+* built to re-use and extend on
+* no steep javascript framework lock-in (ng-admin/ng-admin-react)
+* small & minimal (no jquery) by default
 * you need to provide data using ajax/rest/websocket etc
+
+## Easily extendable
+
+* Datatables ( see demo )
+* Dashboard [Gauges](https://npmjs.com/package/justgage) and [charts](https://www.npmjs.com/package/peity)
 
 ## api
 
